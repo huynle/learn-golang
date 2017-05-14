@@ -8,11 +8,34 @@ import (
 type testpair struct {
 	name   string
 	origin string
+	color  string
 }
 
 var tests = []testpair{
-	{"Granny Smith", "Denver, CO"},
-	{"Honeycrisp", "Portland, OR"},
+	{"Granny Smith", "Denver, CO", "blue"},
+	{"Honeycrisp", "Portland, OR", "red"},
+}
+
+// Test eating apple
+func TestUpdateOrigin(t *testing.T) {
+	for _, pair := range tests {
+		apple := Apple{Name: pair.name}
+		apple.UpdateOrigin(pair.origin)
+		if apple.Origin != pair.origin {
+			t.Errorf("The origin apple does not match! Expected %s, but got %s", pair.origin, apple.Origin)
+		}
+	}
+}
+
+// Test eating apple
+func TestUpdateColor(t *testing.T) {
+	for _, pair := range tests {
+		apple := Apple{Name: pair.name}
+		apple.UpdateColor(pair.color)
+		if apple.Color != pair.color {
+			t.Errorf("something went wrong: apple.color is %s", apple.Color)
+		}
+	}
 }
 
 // Test eating apple

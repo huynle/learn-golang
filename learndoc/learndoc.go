@@ -1,30 +1,29 @@
-// This package is dedicated to learn how to effective document code in golang. There are a few things we will try to figure out in this package.
-// More doc here.
+// This package is dedicated to learn how to effectively document code in golang.
 //
-// 1. Document a package
+// Story
 //
-// 2. Document functions
+// Apple shop, have a bunch of apples. Each Apple is have attributes such as color, name, origin,
+// weight, eaten, etc...
 //
-// 3. Document methods
+// This apple shop have access to all these attributes of an apple. But the customers can only see the name, and the color of the apple. While the shop owner can update the origin of the apple, the
 //
-// 4. Visiblity
+// Extra Notes
 //
-// See Also
-//
+// To document code, a space is needed after the "//" in the comment section
 // This is how to create a Hello World:
-// To document code, an extra space is needed
 //  fmt.Printf("Hello, World")
 // Or:
 //  fmt.Printf("Hello, " + name)
 //
+// Author: Huy Le
 package learndoc
 
 import "fmt"
 
-// This is the host
-const Host = "example.com"
+// This is the host. Single constants will automatically get reorderred to the bottom of constants documentations.
+const Host = "appleshop.com"
 
-// This appears under the const.
+// This appears under the constant section.
 const (
 	// This causes Foo to happen.
 	OptionFoo = 1
@@ -37,6 +36,11 @@ const (
 )
 
 // Apple have fields that describe the apple attributes
+//
+// Notes
+//
+// Methods are attached to their receiver type in the godoc, regardless of
+// their physical location in the code.
 type Apple struct {
 	// The color of the apple is important to keep track of
 	Color string
@@ -50,11 +54,15 @@ type Apple struct {
 	Eaten bool
 }
 
-// UpdateOrigin changes the origin location of the apple. It will return true if the update was successful
-//
-// godoc notes: if the function is a method to a struct, then the documentation will group the methods together. These are orderred last in the document.
+// UpdateOrigin method have the same documentation style as UpdateColor
 func (a *Apple) UpdateOrigin(origin string) bool {
-	a.Name = origin
+	a.Origin = origin
+	return true
+}
+
+// UpdateColor changes the origin location of the apple. It will return true if the update was successful
+func (a Apple) UpdateColor(color string) bool {
+	a.Color = color
 	return true
 }
 
